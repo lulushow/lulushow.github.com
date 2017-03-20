@@ -1,0 +1,96 @@
+<!DOCTYPE>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Task3</title>
+  </head>
+<body>
+
+  <ul id="source">
+    <li><span class="name">北京</span>空气质量：<b class="number">90</b></li>
+    <li><span class="name">上海</span>空气质量：<b class="number">70</b></li>
+    <li><span class="name">天津</span>空气质量：<b class="number">80</b></li>
+    <li><span class="name">广州</span>空气质量：<b class="number">50</b></li>
+    <li><span class="name">深圳</span>空气质量：<b class="number">40</b></li>
+    <li><span class="name">福州</span>空气质量：<b class="number">32</b></li>
+    <li><span class="name">成都</span>空气质量：<b class="number">90</b></li>
+  </ul>
+
+  <ul id="resort">
+    <!-- 
+    <li>第一名：北京空气质量：<b>90</b></li>
+    <li>第二名：北京空气质量：<b>90</b></li>
+    <li>第三名：北京空气质量：<b>90</b></li>
+     -->
+
+  </ul>
+
+  <button id="sort-btn">排序</button>
+
+<script type="text/javascript">
+
+/**
+ * getData方法
+ * 读取id为source的列表，获取其中城市名字及城市对应的空气质量
+ * 返回一个数组，格式见函数中示例
+ */
+function getData() {
+	var oul=document.getElementById("source");
+	var oli=oul.getElementsByTagName("li");
+	var data=new data();
+	for (var row=0;row<oli.length;row++){
+		data[row][0]=oli[row].getElementsByClassName("name")[0];
+		data[row][1]=oli[row].getElementsByClassName("number")[0];
+		};
+
+  return data;
+
+}
+
+/**
+ * sortAqiData
+ * 按空气质量对data进行从小到大的排序
+ * 返回一个排序后的数组
+ */
+function sortAqiData(data) {
+	for (var row=0;row<data.length-1;row++){
+		for (var row2=row+1;row2<data.length;rows++){
+			if(data[row][1]<data[row2][1]){
+				var num=data[row2];
+				data[row2]=data[row];
+				data[row]=num;
+				}
+				}		
+		}
+}
+
+/**
+ * render
+ * 将排好序的城市及空气质量指数，输出显示到id位resort的列表中
+ * 格式见ul中的注释的部分
+ */
+function render(data) {
+	for (var row=0;row<data.length;row++){
+		var list=document.createElement('li');
+		list.innerHTML="第"+(row+1)+"名:"+data[row][0]+"空气质量："+data[row][1];
+		resort.appendChild(list);
+		}
+}
+
+function btnHandle() {
+  var aqiData = getData();
+  aqiData = sortAqiData(aqiData);
+  render(aqiData);
+}
+
+function init() {
+	document.getElementById("sort-btn").onclick=function(){btnHandle()};
+  // 在这下面给sort-btn绑定一个点击事件，点击时触发btnHandle函数
+
+}
+
+init();
+
+</script>
+</body>
+</html>
