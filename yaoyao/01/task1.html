@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>task1</title>
+<style type="text/css">
+.form1 {
+	position: relative;
+	margin: 40px;
+}
+span {
+	font-family: "黑体";
+	font-size: 24px;
+	margin: 20px;
+}
+#inputtext {
+	border: 2px #D1CCCC solid;
+	width: 300px;
+	height: 40px;
+	border-radius: 5px;
+}
+#checkradiu {
+	border: 2px #3E79D5 solid;
+	width: 80px;
+	height: 40px;
+	background-color: #3E79D5;
+	border-radius: 5px;
+	color: white;
+	font-family: "黑体", "宋体", "微软雅黑", "楷体";
+	font-size: 20px;
+	margin: 10px;
+}
+#textinfo {
+	margin: 0 0 0 90px;
+	font-family: "黑体", "宋体", "微软雅黑", "楷体";
+	font-size: 24px;
+	color: #848282;
+}
+</style>
+</head>
+
+<body>
+<div class="form1"> <span>名称</span>
+  <input type="text" id="inputtext" />
+  <button id="checkradiu">验证</button>
+  <div id="textinfo">必填，长度为4~16个字符</div>
+</div>
+<script>
+var text=document.getElementById("inputtext").value;
+var info=document.getElementById("textinfo");
+function checkit(){
+	if(text=""){
+		info.innerHTML="姓名不能为空";
+		info.style.color="red";
+		text.style.border-color="red";
+	}else{
+		text.replace(/[xd800-xffff]/g,'A');
+		text.replace(/[^x00-xff]/g,'AB');
+		if(text.length>16||text.length<4){
+			alert("请输入长度在4~16位内的名称")
+		}else{
+			info.innerHTML="名称格式正确";
+			info.style.color="green";
+			text.style.border-color="green";
+		}
+	}
+}
+document.getElementById("checkradiu").onclick=function(){checkit()};
+</script>
+</body>
+</html>
