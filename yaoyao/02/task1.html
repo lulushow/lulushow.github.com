@@ -1,0 +1,255 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>task1</title>
+<style type="text/css">
+.form{
+	width:620px;
+margin: 20px auto;}
+.clearf:after{
+	display:block;
+	content:"";
+	visibility:hidden;
+	zoom:1;
+	clear:both;
+	height:0;}
+.form1 {
+	position: relative;
+	margin: 40px 0;
+}
+.name_text {
+	float:left;
+	width:100px;
+	text-align:right;
+  font-family: "Microsoft YaHei";
+	font-size: 18px;
+	height: 40px;
+	line-height:40px;
+}
+.input {
+	border: 2px #D1CCCC solid;
+	width: 500px;
+	height: 40px;
+	border-radius: 5px;
+	margin-left:20px;
+	box-sizing:border-box;
+}
+#check_radiu{
+	border: 2px #3E79D5 solid;
+	width: 80px;
+	height: 40px;
+	background-color: #3E79D5;
+	border-radius: 5px;
+	color: white;
+  font-family: "Microsoft YaHei";
+	font-size: 20px;
+	float:right;
+}
+.info{
+  font-family: "Microsoft YaHei";
+	font-size:18px;
+	margin-left:120px;}
+</style>
+</head>
+
+<body>
+<div class="form clearf">
+<div class="form1"><div class="name_text">名称</div>
+  <input type="text" id="names" class="input" required />
+  <div id="name" class="info"></div>
+</div>
+<div class="form1"> <div class="name_text">密码</div>
+  <input type="password" id="password" class="input" required />
+  <div id="pass_it" class="info"></div>
+</div>
+<div class="form1"> <div class="name_text">密码确认</div>
+  <input type="password" id="check_word" class="input" required />
+  <div id="check_pass" class="info"></div>
+</div>
+<div class="form1"> <div class="name_text">邮箱</div>
+  <input type="email" id="email" class="input" required />
+  <div id="mail" class="info"></div>
+</div>
+<div class="form1"><div class="name_text">手机</div>
+  <input type="tel" id="mobile" class="input" required />
+  <div id="phone" class="info"></div>
+</div>
+<input type="submit" id="check_radiu" />
+</div>
+<script>
+var input1=document.getElementById("names");
+var text1=document.getElementById("name");
+var input2=document.getElementById("password");
+var text2=document.getElementById("pass_it");
+var input3=document.getElementById("check_word");
+var text3=document.getElementById("check_pass");
+var input4=document.getElementById("email");
+var text4=document.getElementById("mail");
+var input5=document.getElementById("mobile");
+var text5=document.getElementById("phone");
+var submit_all=document.getElementById("check_radiu");
+
+function focus_name(){
+	text1.innerHTML="必填，长度为4~16个字符";
+	text1.style.color="	#A9A9A9";}
+function check_name(){
+    console.log(input1);
+    var str=input1.value;
+    console.log("value="+str);
+	if(str==""){
+		text1.innerHTML="名称不能为空";
+		text1.style.color="#DC143C";
+		input1.style.borderColor="#DC143C";
+		return false;
+	}else{
+		var len=str.replace(/[^\x00-\xff]/g,"AB").length;
+        console.log("length = " + len);
+		if(len<4 || len>16){
+			text1.innerHTML="姓名格式错误";
+			text1.style.color="#DC143C";
+            input1.style.borderColor="#DC143C";
+            return false;
+		}else{
+			text1.innerHTML="名称格式正确";
+			text1.style.color="green";
+            input1.style.borderColor="green";
+            return true;
+		}
+	}
+}
+function focus_password(){
+    text2.innerHTML="必填，长度为6~18个字母、数字或下划线";
+    text2.style.color="#A9A9A9";}
+function blur_password() {
+    console.log(input2);
+    var str=input2.value;
+    console.log("value="+str);
+    if(str==""){
+        text2.innerHTML="密码不能为空";
+        text2.style.color="#DC143C";
+        input2.style.borderColor="#DC143C";
+        return false;
+    }else{
+        var patrn=/^(\w){6,18}$/;
+        if(!patrn.exec(str)){
+            text2.innerHTML="密码格式错误";
+            text2.style.color="#DC143C";
+            input2.style.borderColor="#DC143C";
+            return false;
+        }else{
+            text2.innerHTML="密码可用";
+            text2.style.color="green";
+            input2.style.borderColor="green";
+            return true;
+        }
+    }
+}
+function focus_check_password(){
+    text3.innerHTML="必填，请重复输入密码";
+    text3.style.color="#A9A9A9";}
+function blur_check_password() {
+    console.log(input3);
+    var str2=input2.value;
+    var str=input3.value;
+    console.log("value_orginal="+str2);
+    console.log("value="+str);
+    if(str==""){
+        text3.innerHTML="重复密码不能为空";
+        text3.style.color="#DC143C";
+        input3.style.borderColor="#DC143C";
+        return false;
+    }else{
+        if(str!=str2){
+            text3.innerHTML="两次输入密码不一致，请重新输入";
+            text3.style.color="#DC143C";
+            input3.style.borderColor="#DC143C";
+            return false;
+        }else{
+            text3.innerHTML="密码输入正确";
+            text3.style.color="green";
+            input3.style.borderColor="green";
+            return true;
+        }
+    }
+}
+function focus_email(){
+    text4.innerHTML="必填，请输入可用邮箱";
+    text4.style.color="#A9A9A9";}
+function blur_email() {
+    console.log(input4);
+    var str=input4.value;
+    console.log("value="+str);
+    if(str==""){
+        text4.innerHTML="邮箱地址不能为空";
+        text4.style.color="#DC143C";
+        input4.style.borderColor="#DC143C";
+        return false;
+    }else{
+        var email_paten= /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+        if(!email_paten.test(str)){
+            text4.innerHTML="邮箱格式错误";
+            text4.style.color="#DC143C";
+            input4.style.borderColor="#DC143C";
+            return false;
+        }else{
+            text4.innerHTML="邮箱格式正确";
+            text4.style.color="green";
+            input4.style.borderColor="green";
+            return true;
+        }
+    }
+}
+function focus_mobile(){
+    text5.innerHTML="必填，请输入可用手机号";
+    text5.style.color="#A9A9A9";}
+function blur_mobile() {
+    console.log(input5);
+    var str=input5.value;
+    console.log("value="+str);
+    if(str==""){
+        text5.innerHTML="手机号码不能为空";
+        text5.style.color="#DC143C";
+        input5.style.borderColor="#DC143C";
+        return false;
+    }else{
+        var mobile_paten=/^1[3|4|5|8][0-9]\d{8}$/;
+        if(!mobile_paten.test(str)){
+            text5.innerHTML="手机号码格式错误";
+            text5.style.color="#DC143C";
+            input5.style.borderColor="#DC143C";
+            return false;
+        }else{
+            text5.innerHTML="手机号码格式正确";
+            text5.style.color="green";
+            input5.style.borderColor="green";
+            return true;
+        }
+    }
+}
+function click_submit(){
+    var state1=check_name();
+    var state2=blur_password();
+    var state3=blur_check_password();
+    var state4=blur_email();
+    var state5=blur_mobile();
+    if(state1&state2&state3&state4&state5){
+        alert("提交成功");
+    }else{
+        alert("提交失败");
+    }
+}
+input1.onfocus=function(){focus_name()};
+input1.onblur=function(){check_name()};
+input2.onfocus=function(){focus_password()};
+input2.onblur=function(){blur_password()};
+input3.onfocus=function(){focus_check_password()};
+input3.onblur=function(){blur_check_password()};
+input4.onfocus=function(){focus_email()};
+input4.onblur=function(){blur_email()};
+input5.onfocus=function(){focus_mobile()};
+input5.onblur=function(){blur_mobile()};
+submit_all.onclick=function () {click_submit()};
+</script>
+</body>
+</html>
