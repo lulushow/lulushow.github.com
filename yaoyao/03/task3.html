@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>联动表单</title>
+    <style type="text/css">
+        form{width: 600px;height: auto;margin: 40px auto;}
+        .up{margin: 40px auto;}
+        .radius{font-family: 宋体;font-size:18px;font-weight: bold;margin:100px;}
+        #in,#out{font-family: 宋体;font-size: 16px;display: none;}
+        .forms{border: 1px solid #D1CCCC;border-radius: 5px;}
+        #school{width: 150px; margin: 20px;}
+        .bold{font-weight: bold;}
+        .form_university{width: 250px;display: none;}
+        #office{width: 400px;margin: 20px;}
+    </style>
+</head>
+<body>
+<form>
+    <div class="up">
+        <label class="radius"><input type="radio" id="student_in" name="student" value="student_in" checked />在校生</label>
+        <label class="radius"><input type="radio" id="student_out" name="student" value="student_out" />非在校生</label>
+    </div>
+    <div id="in"><span class="bold">学校</span>
+        <select name="school" id="school" class="forms">
+            <option value="beijing" id="beijing" selected>北京</option>
+            <option value="shanghai" id="shanghai">上海</option>
+            <option value="chongqing" id="chongqing">重庆</option>
+        </select>
+        <span id="university">
+            <select name="university" id="city_beijing" class="forms form_university">
+                <option value="Peking University">北京大学</option>
+                <option value="Beijing University of Posts and Telecommunications">北京邮电大学</option>
+                <option value="Tsinghua University" selected>清华大学</option>
+                <option value="Beijing Normal University">北京师范大学</option>
+            </select>
+            <select name="university" id="city_shanghai" class="forms form_university">
+                <option value="Shanghai Jiao Tong University">上海交通大学</option>
+                <option value="Tongji University">同济大学</option>
+                <option value="Fudan University" selected>复旦大学</option>
+                <option value="East China Normal University">华东师范大学</option>
+            </select>
+            <select name="university" id="city_chongqing" class="forms form_university">
+                <option value="Chongqing University">重庆大学</option>
+                <option value="Southwestern University">西南大学</option>
+                <option value="Chongqing University of Posts and Telecommunications" selected>重庆邮电大学</option>
+                <option value="Chongqing jiaotong University">重庆交通大学</option>
+            </select>
+        </span>
+    </div>
+    <div id="out">
+        <span class="bold">就业单位</span>
+        <input type="text" id="office" class="forms" />
+    </div>
+</form>
+<script type="text/javascript">
+    var in_student=document.getElementById("student_in");
+    var out_student=document.getElementById("student_out");
+    var show_in=document.getElementById("in");
+    var show_out=document.getElementById("out");
+    function judge_show(){
+        if(in_student.checked){
+            show_in.style.display="block";
+            show_out.style.display="none";
+            var schools=document.getElementById("school");
+            judge_city();
+            schools.onclick=function () {judge_city()};
+        }
+        if (out_student.checked){
+            show_in.style.display="none";
+            show_out.style.display="block";
+        }
+    }
+    function judge_city() {
+        var bj=document.getElementById("beijing");
+        var sh=document.getElementById("shanghai");
+        var cq=document.getElementById("chongqing");
+        if(bj.selected){
+            document.getElementById("city_beijing").style.display="inline";
+            document.getElementById("city_shanghai").style.display="none";
+            document.getElementById("city_chongqing").style.display="none";
+        }else if(sh.selected){
+            document.getElementById("city_beijing").style.display="none";
+            document.getElementById("city_shanghai").style.display="inline";
+            document.getElementById("city_chongqing").style.display="none";
+        }else{
+            document.getElementById("city_beijing").style.display="none";
+            document.getElementById("city_shanghai").style.display="none";
+            document.getElementById("city_chongqing").style.display="inline";
+        }
+    }
+    judge_show();
+    in_student.onclick=function () {judge_show()};
+    out_student.onclick=function () {judge_show()};
+</script>
+</body>
+</html>
