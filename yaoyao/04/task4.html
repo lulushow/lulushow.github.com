@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>听指令的小方块</title>
+    <style type="text/css">
+        table{
+            border: 2px solid #000000;
+            border-collapse: collapse;
+            position: relative;
+            box-sizing: border-box;
+            table-layout: fixed;
+        }
+        td{
+            border: 1px solid #9F9F9F;
+            width: 50px;
+            height: 50px;
+            box-sizing: border-box;
+        }
+        .xaxis{
+            position: relative;
+            width: 550px;
+            height: 50px;
+        }
+        .xaxis span{
+            display: block;
+            float: left;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: large;
+        }
+        .yaxis{
+            width: 50px;
+            height: 500px;
+            float: left;
+        }
+        .yaxis span{
+            display: block;
+            height: 50px;
+            width: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: large;
+        }
+        .right{
+            position: relative;
+        }
+        .inputText{
+            margin: 20px auto 20px 50px;
+        }
+        .btn{
+            width: 60px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            font-weight: bold;
+        }
+        .block{
+            width: 50px;
+            height: 50px;
+        }
+        .blue{
+            width: 100%;
+            height: 30%;
+            background-color: #2d37ff;
+        }
+        .red{
+            width: 100%;
+            height: 70%;
+            background-color: #ff1518;
+        }
+    </style>
+</head>
+<body>
+<div class="yaxis">
+    <span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+</div>
+<div class="right">
+<div class="xaxis">
+    <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+</div>
+<table>
+    <tr>
+        <td></td><td></td><td>
+        <div class="block" id="block" style="position: absolute;left: 150px;top: 50px;">
+            <div class="blue" id="blue"></div>
+            <div class="red" id="red"></div>
+        </div>
+    </td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+    <tr>
+        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td>
+    </tr>
+</table>
+<input type="text" class="inputText" id="inputText" /><button class="btn" id="btn">执行</button>
+</div>
+<script>
+    var str=document.getElementById("inputText");
+    var block=document.getElementById("block");
+    var num=1;
+    var angle=0;
+    function doit(){
+        var order=str.value.toUpperCase();
+        if (order=="TUN LEF"){
+            num=(num+3)%4;
+            block.style.transform="rotate("+(angle-90)+"deg)";
+            angle=angle-90;
+            console.log(block.style.left);
+            console.log(block.style.top);
+        }else if (order=="TUN RIG"){
+            num=(num+1)%4;
+            block.style.transform="rotate("+(angle+90)+"deg)";
+            angle=angle+90;
+            console.log(block.style.left);
+            console.log(block.style.top);
+        }else if (order=="TUN BAC"){
+            num=(num+2)%4;
+            block.style.transform="rotate("+(angle+180)+"deg)";
+            angle=angle+180;
+            console.log(block.style.left);
+            console.log(block.style.top);
+        }else if (order=="GO"){
+            num=num%4;
+            go(num);
+            console.log(block.style.left);
+            console.log(block.style.top);
+        }else {
+            alert("wrong order")
+        }
+    }
+    function go(num) {
+        switch (num){
+            case 0:
+                if (block.style.left=="0px"){
+                    block.style.left="450px";
+                }else {
+                    block.style.left=block.offsetLeft-50+"px";
+                }
+                break;
+            case 1:
+                if(block.style.top=="0px"){
+                    block.style.top="450px";
+                }else {
+                    block.style.top=block.offsetTop-50+"px";
+                }
+                break;
+            case 2:
+                if (block.style.left=="450px"){
+                    block.style.left="0px";
+                }else {
+                    block.style.left=block.offsetLeft+50+"px";
+                }
+                break;
+            case 3:
+                if(block.style.top=="450px"){
+                    block.style.top="0px";
+                }else {
+                    block.style.top=block.offsetTop+50+"px";
+                }
+                break;
+            default:
+                alert("something wrong!");
+        }
+    }
+    document.getElementById("btn").onclick=function () {doit()};
+</script>
+</body>
+</html>
